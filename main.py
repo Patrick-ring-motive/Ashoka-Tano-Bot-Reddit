@@ -81,7 +81,7 @@ keep_alive()
 while True:
   try:
     # Begins the comment stream, scans for new comments
-    for comment in reddit.subreddit('prequelmemes+rebelmemes+mandalorianmemes+starwarsmemes+ahsokamemes+animatedstarwarsmemes+ahsokatano+prequelseparatist+clonewarsmemes+ahsokatvshow+jedicouncilofelrond+prequelseparatist').stream.comments(skip_existing=True):
+    for comment in reddit.subreddit('prequelmemes+rebelmemes+mandalorianmemes+starwarsmemes+ahsokamemes+animatedstarwarsmemes+ahsokatano+prequelseparatist+clonewarsmemes+ahsokatvshow+jedicouncilofelrond+prequelseparatist+botmakers_guild').stream.comments(skip_existing=True):
         
       author_name = str(comment.author.name) # Fetch author name
       author_id = str(comment.author.id) # Fetch author id
