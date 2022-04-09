@@ -274,9 +274,8 @@ while True:
             print(COL.CYAN + "I don't reply to myself.")
 
   except:
-   print(COL.WHITE + "="*DASH_AMOUNT)
-   print(COL.PURPLE + COL.NEGATIVE + "Reply failed! Passing.", COL.END)
-   print(COL.WHITE + "="*DASH_AMOUNT)
-   pass
-
-
+    print(COL.WHITE + "="*DASH_AMOUNT)
+    print(COL.PURPLE + COL.NEGATIVE + "Reply failed! Passing.", COL.END)
+    #print("Error: " + COL.RED, i)
+    print(COL.WHITE + "="*DASH_AMOUNT)
+    pass

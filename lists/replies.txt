@@ -1,13 +1,13 @@
 battle as a whole:I know I was wrong. I just got so caught up in my own success, I didn't look at the battle as a whole. I wasn't being disobedient. I just. . . forgot
 jedi master:No. No, it's okay. I understand. I'm the Padawan, you're the Master.
-tough:You don't have to look tough to be tough
+look tough:You don't have to look tough to be tough
 luke skywalker:So much like your father.
 giant wall:Look at that giant wall with all the gun emplacements. That won't be easy to get past.
 anakin skywalker was weak. i destroyed him.:Then I will avenge his death!
 a leader:You don’t have to carry a sword to be powerful. Some leaders’ strength is inspiring others.
 luck:Master Kenobi always said there’s no such thing as luck.
 know about the force:In my experience, when you think you understand the Force, you realize just how little you know.
-crash:Well, we’re not going to crash into the star, but we’re definitely going to hit that planet!
+crash into:Well, we’re not going to crash into the star, but we’re definitely going to hit that planet!
 survivors:Wait! Just because there hasn’t been any survivors before, doesn’t mean there won’t be any this time.
 Lux:Hungry? Careful not to choke on your stupidity.
 starve:Don’t worry. We’ll run out of air long before we starve.
@@ -16,12 +16,12 @@ missiles:Look out, incoming missiles!
 asajj ventress:If it isn't the hairless harpy.
 landing:I'm just glad he wasn't awake to see that landing!
 demolishing:I've certainly perfected the art of demolishing ships and almost getting my master killed.
-squad:All right, all right. Let's go, squad. Pull back to command ship.
+pull back:All right, all right. Let's go, squad. Pull back to command ship.
 battleships:I thought I could knock out those battleships so when Master Obi-Wan arrived, he could get through.
 guard:Guard duty? For how long?
 kill count:My squadron alone had 55 kills.
-thief:A thief stole my lightsaber, and I only got a quick look at him. I could tell he definitely came from one of the aquatic planets. You know, one of the water worlds?
-playing the part:Remind me why I'm the one playing the part of the slave?
+a thief:A thief stole my lightsaber, and I only got a quick look at him. I could tell he definitely came from one of the aquatic planets. You know, one of the water worlds?
+the slave:Remind me why I'm the one playing the part of the slave?
 cad bane's hat:Ugh, who else wears a hat like that?
 cad banes hat:Ugh, who else wears a hat like that?
 cruiser:Uh, shouldn't we be getting back to the cruiser?
@@ -36,3 +36,6 @@ snips:Don't call me that. I hate it when you call me that!
 tinny:You must be General Grievous. He's just another tinny, boys. Let's scrap him like the rest.
 and she was a good friend:Care to tell me what this is all about? Or would you rather save it for the Council?
 r/andshewasagoodfriend:Care to tell me what this is all about? Or would you rather save it for the Council?
+plo koon:If anyone could survive, Master Plo could.
+neebray:That one looks hungry.
+pookums:Pookums? Oh, brother!
