@@ -10,6 +10,7 @@
 #Everything pulled = White
 #Spacers = White
 #General Messages = Cyan
+#
 
 
 import praw
