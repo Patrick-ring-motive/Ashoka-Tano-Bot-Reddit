@@ -10,7 +10,6 @@
 #Everything pulled = White
 #Spacers = White
 #General Messages = Cyan
-#
 
 
 import praw
@@ -395,3 +394,4 @@ while True:
     #print("Error: " + COL.RED, i)
     print(COL.WHITE + "="*DASH_AMOUNT)
     pass
+
