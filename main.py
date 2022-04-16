@@ -279,10 +279,12 @@ while True:
                       print(COL.GREEN + "Reply: " + COL.WHITE, str(generated_reply)) # Prints random quote from reply
                       print(COL.GREEN + "Subreddit: " + COL.WHITE, comment.subreddit)
                       print("-"*DASH_AMOUNT)
+                      time.sleep(COOLDOWN)
                     
                 else: # on a failed die roll, the comment is ignored.
                   print(COL.BLUE + "Roll failed, not replying")
                   print(COL.WHITE + "-"*DASH_AMOUNT)
+  
 
 
 
@@ -338,6 +340,7 @@ while True:
                       print(COL.GREEN + "Subreddit: " + COL.WHITE, comment.subreddit)
                       print("-"*DASH_AMOUNT)
                       time.sleep(COOLDOWN) # Cooldown in seconds
+                    
               else: # on a failed die roll, the comment is ignored.
                   print(COL.BLUE + "Roll failed, not replying")
                   print(COL.WHITE + "-"*DASH_AMOUNT)
@@ -368,6 +371,7 @@ while True:
                       print(COL.GREEN + "Reply: " + COL.WHITE, str(generated_reply)) # Prints random quote from reply
                       print(COL.GREEN + "Subreddit: " + COL.WHITE, comment.subreddit)
                       print("-"*DASH_AMOUNT)
+                      time.sleep(COOLDOWN)
 
 
                 else: # on a failed die roll, the comment is ignored.
