@@ -5,10 +5,11 @@
 #Color Code 
 #Title = Purple  
 #Ignore stuff = Yellow
-#Cooldown = Blue
+#Dice Rolls = Blue
 #Describers = Green
 #Everything pulled = White
-#spacers = White
+#Spacers = White
+#General Messages = Cyan
 
 
 import praw
@@ -32,6 +33,8 @@ REPLIES = "lists/replies.txt"
 GENERAL_TRIGGERS = "lists/general_triggers.txt"
 GRAY_LIST = "lists/gray_list.txt"
 GRAY_LIST_REPLIES = "lists/gray_list_replies.txt"
+CAKE_DAY_LIST = "lists/cake_day_list.txt"
+RESPONSE_REPLIES = "lists/response_replies.txt"
 
 #special number amounts or something
 DASH_AMOUNT = 5
@@ -86,7 +89,66 @@ while True:
       author_name = str(comment.author.name) # Fetch author name
       author_id = str(comment.author.id) # Fetch author id
       comment_lower = comment.body.lower() # Fetch comment body and convert to lowercase
+      redditor = reddit.redditor(author_name) # Gets account associated with username
+      cake_day = time.strftime("%D", time.gmtime(redditor.created_utc)) # Grabs redditor cake day and converts it to usable format
+      cake_day_str = cake_day[0:5] # Chops year off of Cake Day
+      todays_date = time.strftime("%D", time.gmtime(comment.created_utc)) # Grabs Date
+      todays_date_str = todays_date[0:5] # Chops Year off of date
+      is_cake_day = 'false' # Default to false
+     
+#Cake Day Stuff
+      if cake_day_str == todays_date_str:
+                
+        is_cake_day = 'true'
+                
+      else:
+                
+        is_cake_day = 'false'
+            
+      with open(CAKE_DAY_LIST, 'r')as cd: # Opens cake day list in read only mode
+            
+        cd_contents = cd.read() # Reads the contents of cake day list
+                
+        if author_id in cd_contents and author_id != bot_id:
+                
+          is_cake_day = 'false'
+                
+      if cake_day == todays_date: #Checks for newly made accounts and sets them to false
+                
+        is_cake_day = 'false'
 
+      if author_id == bot_id:
+
+        is_cake_day = 'false'
+
+      elif is_cake_day == 'true': #Checks to see if cakeday is true 
+        
+        cake_day_phrase = ("Looks like I got here just in time. Happy cake day, " + author_name + ".")
+        print("-"*DASH_AMOUNT)
+        print(COL.PURPLE + "Cake Day Reply")
+        print(COL.GREEN + "User: " + COL.WHITE, comment.author.name)
+        print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)    
+        print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
+        print(COL.GREEN + "Reply: " + COL.WHITE, cake_day_phrase)
+        comment.reply(cake_day_phrase)
+        is_cake_day = 'false'
+                    
+        with open(CAKE_DAY_LIST, 'a') as f: # Opens cake day list in append mode
+          
+          # Writes Username and ID of user to the cake day list
+          f.write(author_name)
+          f.write("\n")
+          f.write(author_id)
+          f.write("\n")
+          f.write("\n")
+          
+          print(COL.CYAN + "User added to Cake Day List")
+          print(COL.WHITE + "-"*DASH_AMOUNT)
+          time.sleep(COOLDOWN)
+
+
+
+#ignore list stuff
       with open(IGNORE_LIST, 'r')as rf: # Opens ignore_list in read only mode
 
         rf_contents = rf.read() # Reads the contents of ignore list
@@ -142,14 +204,30 @@ while True:
               print(COL.YELLOW + "Ignore not a reply. Not adding to list.")
               print(COL.WHITE + "-"*DASH_AMOUNT)
 
+
+
+#Reply Area
           else:
             
           
             proceed_to_comment = True
 
             #list_content(REPLIES)
+
+#For Response Replies
+            response_triggers = []
+            response_responses = []
+            for item in list_content(RESPONSE_REPLIES):
+              response_triggers.append(item.split(":")[0])
+              response_responses.append(item.split(":")[1])
+    
+            response_word = "not a keyword"
+            for item in response_triggers:
+              if not (response_word in response_triggers):
+                if item in clean_string(comment.body):
+                  response_word = item
             
-            #For Normal Replies
+#For Normal Replies
             rep_triggers = []
             rep_responses = []
             for item in list_content(REPLIES):
@@ -162,7 +240,7 @@ while True:
                 if item in clean_string(comment.body):
                   word = item
 
-             #For Gray List Replies
+#For Gray List Replies
             gray_triggers = []
             gray_responses = []
             for item in list_content(GRAY_LIST_REPLIES):
@@ -171,30 +249,69 @@ while True:
     
             gray_word = "not a keyword"
             for item in gray_triggers:
-              if not (word in gray_triggers):
+              if not (gray_word in gray_triggers):
                 if item in clean_string(comment.body):
                   gray_word = item
 
-           #Normal Reply Stuff
-            if word in rep_triggers and is_graylisted=="no":
-          
-              #print( COL.LIGHT_GRAY + "'Rep' Trigger Called. Line end at 1.")
-              if proceed_to_comment:
+
+                  
+#Response Reply
+            if comment.parent().author.id == bot_id:   
+              if response_word in response_triggers:
+              #print( COL.LIGHT_GRAY + "Responce Trigger Called. Line end at 4.")       
+                # This function rolls a die and returns true on 1
                 print(COL.WHITE + "-"*DASH_AMOUNT)
-                print(COL.PURPLE + "Normal Reply")
-                generated_reply = rep_responses[rep_triggers.index(word)]
-                comment.reply(generated_reply) # Replies to comment with quote
-                print(COL.GREEN + "User: " + COL.WHITE, comment.author)
-                print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
-                print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
-                print(COL.GREEN + "Keyword: " + COL.WHITE, word)
-                print(COL.GREEN + "Reply: " + COL.WHITE, str(generated_reply)) # Prints random quote from reply
-                print(COL.GREEN + "Subreddit: " + COL.WHITE, comment.subreddit)
-                print("-"*DASH_AMOUNT)
-                time.sleep(COOLDOWN)
+                roll_die = random.randint(1, 1)
+                print(COL.BLUE + "Dice Roll: ", roll_die)
+                roll_die_string = str(roll_die)
+                if roll_die_string == "1":
+      
+                  if response_word in response_triggers:
+                    if proceed_to_comment:
+                      print(COL.WHITE + "-"*DASH_AMOUNT)
+                      print(COL.PURPLE + "Response Reply")
+                      generated_reply = response_responses[response_triggers.index(response_word)]
+                      comment.reply(generated_reply) # Replies to comment with quote
+                      print(COL.GREEN + "User: " + COL.WHITE, comment.author)
+                      print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
+                      print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
+                      print(COL.GREEN + "Keyword: " + COL.WHITE, response_word)
+                      print(COL.GREEN + "Reply: " + COL.WHITE, str(generated_reply)) # Prints random quote from reply
+                      print(COL.GREEN + "Subreddit: " + COL.WHITE, comment.subreddit)
+                      print("-"*DASH_AMOUNT)
+                    
+                else: # on a failed die roll, the comment is ignored.
+                  print(COL.BLUE + "Roll failed, not replying")
+                  print(COL.WHITE + "-"*DASH_AMOUNT)
 
 
-            #General Reply Stuff
+
+#Normal Reply Stuff
+            elif word in rep_triggers and is_graylisted=="no":
+
+              if word == "kill count" and comment.parent().author.name == "clone_trooper_bot":
+
+                print(COL.CYAN + "Clone Kill Count")
+
+              else:
+          
+                #print( COL.LIGHT_GRAY + "'Rep' Trigger Called. Line end at 1.")
+                if proceed_to_comment:
+                  print(COL.WHITE + "-"*DASH_AMOUNT)
+                  print(COL.PURPLE + "Normal Reply")
+                  generated_reply = rep_responses[rep_triggers.index(word)]
+                  comment.reply(generated_reply) # Replies to comment with quote
+                  print(COL.GREEN + "User: " + COL.WHITE, comment.author)
+                  print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
+                  print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
+                  print(COL.GREEN + "Keyword: " + COL.WHITE, word)
+                  print(COL.GREEN + "Reply: " + COL.WHITE, str(generated_reply)) # Prints random quote from reply
+                  print(COL.GREEN + "Subreddit: " + COL.WHITE, comment.subreddit)
+                  print("-"*DASH_AMOUNT)
+                  time.sleep(COOLDOWN)
+
+
+#General Reply Stuff
             elif any(word in comment_lower for word in list_content(GENERAL_TRIGGERS)) and is_graylisted=="no": 
               #print( COL.LIGHT_GRAY + "General Trigger Called. Line end at 2.")
               # This function rolls a die and returns true on 1
@@ -213,7 +330,6 @@ while True:
                       generated_reply_unadjusted = random.choice(quote_selection) # Fetch random quote from list
                       #generated_reply = generated_reply_unadjusted.replace("username", author_name)
                       generated_reply = generated_reply_unadjusted
-                      
                       comment.reply(generated_reply) # Replies to comment with random quote
                       print(COL.GREEN + "User: " + COL.WHITE, comment.author)
                       print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
@@ -227,7 +343,7 @@ while True:
                   print(COL.WHITE + "-"*DASH_AMOUNT)
 
     
-            #Gray List Reply Stuff
+#Gray List Reply Stuff
             elif gray_word in gray_triggers and is_graylisted == "yes":
               #print( COL.LIGHT_GRAY + "Graylist Trigger Called. Line end at 3.")
               if is_graylisted == "yes":
@@ -242,26 +358,24 @@ while True:
                   if gray_word in gray_triggers:
                     if proceed_to_comment:
                       print(COL.WHITE + "-"*DASH_AMOUNT)
-                      print(COL.PURPLE + "Normal Reply")
+                      print(COL.PURPLE + "Gray List Reply")
                       generated_reply = gray_responses[gray_triggers.index(gray_word)]
                       comment.reply(generated_reply) # Replies to comment with quote
                       print(COL.GREEN + "User: " + COL.WHITE, comment.author)
                       print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
                       print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
-                      print(COL.GREEN + "Keyword: " + COL.WHITE, word)
+                      print(COL.GREEN + "Keyword: " + COL.WHITE, gray_word)
                       print(COL.GREEN + "Reply: " + COL.WHITE, str(generated_reply)) # Prints random quote from reply
                       print(COL.GREEN + "Subreddit: " + COL.WHITE, comment.subreddit)
                       print("-"*DASH_AMOUNT)
-                     
-                    
-                   
+
+
                 else: # on a failed die roll, the comment is ignored.
                   print(COL.BLUE + "Roll failed, not replying")
                   print(COL.WHITE + "-"*DASH_AMOUNT)
-        
-                
-               
-                    
+
+                  
+#On Ignore List            
         else: # If user on ignore list, prints User Ignored, and does not reply to comment
           if comment.author.id != bot_id:
 
@@ -272,7 +386,8 @@ while True:
             print(COL.WHITE + "-"*DASH_AMOUNT)
           else:
             print(COL.CYAN + "I don't reply to myself.")
-
+            
+#Failer to reply message and passthrough
   except:
     print(COL.WHITE + "="*DASH_AMOUNT)
     print(COL.PURPLE + COL.NEGATIVE + "Reply failed! Passing.", COL.END)
