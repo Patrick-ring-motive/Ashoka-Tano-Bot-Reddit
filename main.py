@@ -35,6 +35,7 @@ GRAY_LIST = "lists/gray_list.txt"
 GRAY_LIST_REPLIES = "lists/gray_list_replies.txt"
 CAKE_DAY_LIST = "lists/cake_day_list.txt"
 RESPONSE_REPLIES = "lists/response_replies.txt"
+CAKE_DAY_REPLIES = "lists/cake_day_replies.txt"
 
 #special number amounts or something
 DASH_AMOUNT = 5
@@ -97,10 +98,15 @@ while True:
       is_cake_day = 'false' # Default to false
      
 #Cake Day Stuff
+
       if cake_day_str == todays_date_str:
                 
         is_cake_day = 'true'
-                
+      
+      elif comment.body == 'cakedaytest66':
+
+        is_cake_day = 'true'
+        
       else:
                 
         is_cake_day = 'false'
@@ -123,30 +129,37 @@ while True:
 
       elif is_cake_day == 'true': #Checks to see if cakeday is true 
         
-        cake_day_phrase = ("Looks like I got here just in time. Happy cake day, " + author_name + ".")
-        print("-"*DASH_AMOUNT)
-        print(COL.PURPLE + "Cake Day Reply")
-        print(COL.GREEN + "User: " + COL.WHITE, comment.author.name)
-        print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)    
-        print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
-        print(COL.GREEN + "Reply: " + COL.WHITE, cake_day_phrase)
-        comment.reply(cake_day_phrase)
-        is_cake_day = 'false'
+        with open(CAKE_DAY_REPLIES, 'r', encoding='utf-8') as tf:
+          
+          quote_selection = tf.read().splitlines()
+
+          print(COL.WHITE + "-"*DASH_AMOUNT)
+          print(COL.PURPLE + "Cake Day Reply")
+          generated_reply_unadjusted = random.choice(quote_selection) # Fetch random quote from list
+          generated_reply = generated_reply_unadjusted.replace("username", author_name)
+          comment.reply(generated_reply) # Replies to comment with random quote
+          print(COL.GREEN + "User: " + COL.WHITE, comment.author)
+          print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
+          print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
+          print(COL.GREEN + "Reply: " + COL.WHITE, str(generated_reply)) # Prints random quote from reply
+          print(COL.GREEN + "Subreddit: " + COL.WHITE, comment.subreddit)
+          is_cake_day = 'false'
                     
-        with open(CAKE_DAY_LIST, 'a') as f: # Opens cake day list in append mode
+          with open(CAKE_DAY_LIST, 'a') as f: # Opens cake day list in append mode
           
-          # Writes Username and ID of user to the cake day list
-          f.write(author_name)
-          f.write("\n")
-          f.write(author_id)
-          f.write("\n")
-          f.write("\n")
-          
-          print(COL.CYAN + "User added to Cake Day List")
-          print(COL.WHITE + "-"*DASH_AMOUNT)
-          time.sleep(COOLDOWN)
-          print(COL.CYAN + "Cooldown Over")
-          print(COL.WHITE + "-"*DASH_AMOUNT)
+            # Writes Username and ID of user to the cake day list
+            f.write(author_name)
+            f.write("\n")
+            f.write(author_id)
+            f.write("\n")
+            f.write("\n")
+            #Cake day list confermation
+            print(COL.WHITE + "-"*DASH_AMOUNT)
+            print(COL.CYAN + "User added to Cake Day List")
+            print(COL.WHITE + "-"*DASH_AMOUNT)
+            time.sleep(COOLDOWN)
+            print(COL.CYAN + "Cooldown Over")
+            print(COL.WHITE + "-"*DASH_AMOUNT)
 
 
 
@@ -405,10 +418,10 @@ while True:
             #print(COL.CYAN + "I don't reply to myself.")
             
 #Failer to reply message and passthrough
-  except: #IndexError as i
+  except Exception as e: #IndexError as i
     print(COL.WHITE + "="*DASH_AMOUNT)
     print(COL.PURPLE + COL.NEGATIVE + "Reply failed! Passing.", COL.END)
-    #print("Error: " + COL.RED, i)
+    print("Error: " + COL.RED, e)
     print(COL.WHITE + "="*DASH_AMOUNT)
     pass
 
