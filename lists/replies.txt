@@ -32,7 +32,6 @@ keepers of the peace:As a Jedi, we were trained to be keepers of the peace, not 
 maul escaped:He didn't escape. I let him out.
 ahsoka is annoying:You'll find I have many qualities for you to dislike.
 defeat:To defeat your enemy you have to understand them.
-snips:Don't call me that. I hate it when you call me that!
 tinny:You must be General Grievous. He's just another tinny, boys. Let's scrap him like the rest.
 and she was a good friend:Care to tell me what this is all about? Or would you rather save it for the Council?
 r/andshewasagoodfriend:Care to tell me what this is all about? Or would you rather save it for the Council?
@@ -40,3 +39,7 @@ plo koon:If anyone could survive, Master Plo could.
 neebray:That one looks hungry.
 pookums:Pookums? Oh, brother!
 ashoka:Careful not to choke on your stupidity. It's Ahsoka not Ashoka!
+snips:Don't call me that. I hate it when you call me that.
+ahsoka is ugly:Careful not to choke on your stupidity.
+ahsoka, you are ugly:Careful not to choke on your stupidity.
+ahsoka, you're ugly:Careful not to choke on your stupidity.

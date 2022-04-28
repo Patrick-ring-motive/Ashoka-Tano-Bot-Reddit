@@ -1,5 +1,4 @@
 #Ahsoka_Tano_Bot
-#Created By Joshua Most(BushMasterJM) and Kennenia McDaniel(Sharpoen)
 #Not intended to be used abusively on reddit
 
 #Color Code 
@@ -90,78 +89,6 @@ while True:
       author_name = str(comment.author.name) # Fetch author name
       author_id = str(comment.author.id) # Fetch author id
       comment_lower = comment.body.lower() # Fetch comment body and convert to lowercase
-      redditor = reddit.redditor(author_name) # Gets account associated with username
-      cake_day = time.strftime("%D", time.gmtime(redditor.created_utc)) # Grabs redditor cake day and converts it to usable format
-      cake_day_str = cake_day[0:5] # Chops year off of Cake Day
-      todays_date = time.strftime("%D", time.gmtime(comment.created_utc)) # Grabs Date
-      todays_date_str = todays_date[0:5] # Chops Year off of date
-      is_cake_day = 'false' # Default to false
-     
-#Cake Day Stuff
-
-      if cake_day_str == todays_date_str:
-                
-        is_cake_day = 'true'
-      
-      elif comment.body == 'cakedaytest66':
-
-        is_cake_day = 'true'
-        
-      else:
-                
-        is_cake_day = 'false'
-            
-      with open(CAKE_DAY_LIST, 'r')as cd: # Opens cake day list in read only mode
-            
-        cd_contents = cd.read() # Reads the contents of cake day list
-                
-        if author_id in cd_contents and author_id != bot_id:
-                
-          is_cake_day = 'false'
-                
-      if cake_day == todays_date: #Checks for newly made accounts and sets them to false
-                
-        is_cake_day = 'false'
-
-      if author_id == bot_id:
-
-        is_cake_day = 'false'
-
-      elif is_cake_day == 'true': #Checks to see if cakeday is true 
-        
-        with open(CAKE_DAY_REPLIES, 'r', encoding='utf-8') as tf:
-          
-          quote_selection = tf.read().splitlines()
-
-          print(COL.WHITE + "-"*DASH_AMOUNT)
-          print(COL.PURPLE + "Cake Day Reply")
-          generated_reply_unadjusted = random.choice(quote_selection) # Fetch random quote from list
-          generated_reply = generated_reply_unadjusted.replace("username", author_name)
-          comment.reply(generated_reply) # Replies to comment with random quote
-          print(COL.GREEN + "User: " + COL.WHITE, comment.author)
-          print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
-          print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
-          print(COL.GREEN + "Reply: " + COL.WHITE, str(generated_reply)) # Prints random quote from reply
-          print(COL.GREEN + "Subreddit: " + COL.WHITE, comment.subreddit)
-          is_cake_day = 'false'
-                    
-          with open(CAKE_DAY_LIST, 'a') as f: # Opens cake day list in append mode
-          
-            # Writes Username and ID of user to the cake day list
-            f.write(author_name)
-            f.write("\n")
-            f.write(author_id)
-            f.write("\n")
-            f.write("\n")
-            #Cake day list confermation
-            print(COL.WHITE + "-"*DASH_AMOUNT)
-            print(COL.CYAN + "User added to Cake Day List")
-            print(COL.WHITE + "-"*DASH_AMOUNT)
-            time.sleep(COOLDOWN)
-            print(COL.CYAN + "Cooldown Over")
-            print(COL.WHITE + "-"*DASH_AMOUNT)
-
-
 
 #ignore list stuff
       with open(IGNORE_LIST, 'r')as rf: # Opens ignore_list in read only mode
@@ -424,4 +351,3 @@ while True:
     print("Error: " + COL.RED, e)
     print(COL.WHITE + "="*DASH_AMOUNT)
     pass
-
