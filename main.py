@@ -71,7 +71,7 @@ reddit = praw.Reddit(
   client_secret = os.environ['client_secret'],
   username = os.environ['username'],
   password = os.environ['password'],
-  user_agent = "<AhsokaBot123>"
+  user_agent = "<AshokaBot123>"
 )
 
 # print(reddit.auth.url(["identity"], "...", "permanent"))
