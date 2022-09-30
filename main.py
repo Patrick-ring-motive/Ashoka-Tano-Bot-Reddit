@@ -47,7 +47,7 @@ COOLDOWN = 60
 def pad_string(str):
   padded=""
   for ch in str:
-    padded=padded+ch+"🧀"
+    padded=padded+ch+"​"
   return padded
 
 #Initalizers
