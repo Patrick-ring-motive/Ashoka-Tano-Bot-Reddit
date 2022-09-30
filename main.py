@@ -43,8 +43,12 @@ NEWLINE_AMOUNT = 1
 #The time in seconds between posts
 COOLDOWN = 60
 
-
-
+# pad strings with zero-width whitespace to prevent triggering other bots
+def pad_string(str):
+  padded=""
+  for ch in str:
+    padded=padded+ch+"*"
+  return padded
 
 #Initalizers
 def clean_string(raw_string):
@@ -137,7 +141,7 @@ while True:
                 print(COL.WHITE + "-"*DASH_AMOUNT)
                 
                 # Replies to user comment
-                comment.reply("If it isn’t the hairless harpy. How nice of you. Tell you what, I’ll give you a merciful death. User Added to Ignore List.")
+                comment.reply(pad_string("If it isn’t the hairless harpy. How nice of you. Tell you what, I’ll give you a merciful death. User Added to Ignore List."))
                 
                 time.sleep(COOLDOWN)
                 print(COL.CYAN + "Cooldown Over")
@@ -214,7 +218,7 @@ while True:
                   print(COL.WHITE + "-"*DASH_AMOUNT)
                   print(COL.PURPLE + "Normal Reply")
                   generated_reply = rep_responses[rep_triggers.index(word)]
-                  comment.reply(generated_reply) # Replies to comment with quote
+                  comment.reply(pad_string(generated_reply)) # Replies to comment with quote
                   print(COL.GREEN + "User: " + COL.WHITE, comment.author)
                   print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
                   print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
@@ -246,7 +250,7 @@ while True:
                       generated_reply_unadjusted = random.choice(quote_selection) # Fetch random quote from list
                       #generated_reply = generated_reply_unadjusted.replace("username", author_name)
                       generated_reply = generated_reply_unadjusted
-                      comment.reply(generated_reply) # Replies to comment with random quote
+                      comment.reply(pad_string(generated_reply)) # Replies to comment with random quote
                       print(COL.GREEN + "User: " + COL.WHITE, comment.author)
                       print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
                       print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
@@ -279,7 +283,7 @@ while True:
                       print(COL.WHITE + "-"*DASH_AMOUNT)
                       print(COL.PURPLE + "Gray List Reply")
                       generated_reply = gray_responses[gray_triggers.index(gray_word)]
-                      comment.reply(generated_reply) # Replies to comment with quote
+                      comment.reply(pad_string(generated_reply)) # Replies to comment with quote
                       print(COL.GREEN + "User: " + COL.WHITE, comment.author)
                       print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
                       print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
@@ -314,7 +318,7 @@ while True:
                       print(COL.WHITE + "-"*DASH_AMOUNT)
                       print(COL.PURPLE + "Response Reply")
                       generated_reply = response_responses[response_triggers.index(response_word)]
-                      comment.reply(generated_reply) # Replies to comment with quote
+                      comment.reply(pad_string(generated_reply)) # Replies to comment with quote
                       print(COL.GREEN + "User: " + COL.WHITE, comment.author)
                       print(COL.GREEN + "User ID: " + COL.WHITE, comment.author.id)
                       print(COL.GREEN + "Comment: " + COL.WHITE, comment.body.lower())
