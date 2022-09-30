@@ -24,6 +24,24 @@ from our_colors import COL
 
 from datetime import datetime
 
+import nltk
+from nltk.corpus import wordnet as wn
+
+def get_all_synonyms(word):
+    synonyms = []
+    for ss in wn.synsets(word):
+        synonyms.extend(ss.lemma_names())
+        for sim in ss.similar_tos():
+            synonyms_batch = sim.lemma_names()
+            synonyms.extend(synonyms_batch)
+    synonyms = set(synonyms)
+    if word in synonyms:
+        synonyms.remove(word)
+    synonyms = [synonym.replace('_',' ') for synonym in synonyms]
+    return synonyms
+
+print(get_all_synonyms('small'))
+
 
 #directories
 IGNORE_LIST = "lists/ignore_list.txt"
