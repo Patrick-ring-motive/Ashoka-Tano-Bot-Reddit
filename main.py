@@ -42,6 +42,7 @@ NEWLINE_AMOUNT = 1
 
 #The time in seconds between posts
 COOLDOWN = 60
+COOLDOWN = 0
 
 # pad strings with zero-width whitespace to prevent triggering other bots
 def pad_string(str):
