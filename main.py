@@ -46,8 +46,8 @@ COOLDOWN = 60
 # pad strings with zero-width whitespace to prevent triggering other bots
 def pad_string(str):
   padded=""
-  for ch in range(0, len(str)):
-    padded=padded+ch+"*"
+  for ch in str:
+    padded=padded+ch+"🧀"
   return padded
 
 #Initalizers
