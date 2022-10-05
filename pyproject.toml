@@ -10,6 +10,9 @@ numpy = "^1.22.2"
 replit = "^3.2.4"
 Flask = "^2.1.0"
 praw = "^7.5.0"
+nltk = "^3.7"
+gingerit = "^0.8.2"
+googletrans = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 

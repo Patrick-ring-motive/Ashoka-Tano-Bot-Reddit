@@ -42,3 +42,5 @@ snaps:Don't call me that. I hate it when you call me that.
 ashoka is ugly:Careful not to choke on your stupidity.
 ashoka, you are ugly:Careful not to choke on your stupidity.
 ashoka, you're ugly:Careful not to choke on your stupidity.
+democracy*:🐧🐧🐧🐧Well boys, we did it democracy is no more.*
+peace*:🔪🦢Peace was never an option.*
